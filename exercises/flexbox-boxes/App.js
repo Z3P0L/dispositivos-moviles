@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
+import getStyles from './components/styles';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App = () => {
+	const { width } = Dimensions.get('window');
+	const styles = getStyles(width);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	return (
+		<View style={styles.container}>
+			<View style={styles.boxes}>
+				<View style={[styles.box, styles.firstBox]}>
+					<Text>A</Text>
+				</View>
+			</View>
+			<View style={[styles.two, width <= 768 && styles.twoColumn]}>
+				<View style={styles.boxes}>
+					<View style={[styles.box, styles.firstBox]}>
+						<Text>B</Text>
+					</View>
+					<View style={[styles.box, styles.notFirstBox]}>
+						<Text>C</Text>
+					</View>
+					<View style={[styles.box, styles.notFirstBox]}>
+						<Text>D</Text>
+					</View>
+					<View style={[styles.box, styles.notFirstBox]}>
+						<Text>E</Text>
+					</View>
+				</View>
+				<View style={styles.boxes}>
+					<View style={[styles.box, styles.notFirstBox]}>
+						<Text>F</Text>
+					</View>
+				</View>
+			</View>
+		</View>
+	);
+};
+
+export default App;
